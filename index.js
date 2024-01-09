@@ -22,11 +22,11 @@ app.post('/hook', (req, res) => {
     } else if (messageToSend === 'cartão') {
         messageToSend = 'Qual o assunto relacionado ao cartão ?';
     } else if (messageToSend === '1 - saldo da fatura') {
-        return 'O valor atual da sua fatura é: R$ 1000.00';
+        messageToSend = 'O valor atual da sua fatura é: R$ 1000.00';
     } else if (messageToSend === 'encerrar atendimento') {
-        return 'Obrigado por nos contatar';
+        messageToSend = 'Obrigado por nos contatar';
     } else {
-        return 'Desculpe não conseguimos entender a sua necessidade, contate o numero: XXX';
+        messageToSend = 'Desculpe não conseguimos entender a sua necessidade, contate o numero: XXX';
     }
 
     sendMessage(messageToSend, senderNumber);
