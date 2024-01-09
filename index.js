@@ -1,4 +1,4 @@
-const client = require('twilio')('ACd73bb4fef1b43626e8872a211e77d0ad', '083484a3833e6b728a0d5f0e06ada622');
+const client = require('twilio')('ACd73bb4fef1b43626e8872a211e77d0ad', '74ecb0d754fd13e03b2fcbffe1288021');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/hook', (req, res) => {
-    let messageToSend = req.headers.message;
-    const senderNumber = req.headers.to;
-
+    let messageToSend = req.body.message;
+    const senderNumber = req.body.to;
+    console.log(messageToSend, senderNumber)
     if (messageToSend === 'oi') {
         messageToSend = 'Olá, em que posso ajudar ?'
     } else if (messageToSend === 'produto') {
