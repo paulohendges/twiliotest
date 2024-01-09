@@ -1,0 +1,20 @@
+{
+  "name": "twiliotest",
+  "version": "1.0.0",
+  "description": "twilio test messagem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "twilio": "^5.0.0-rc.1"
+  }
+}
