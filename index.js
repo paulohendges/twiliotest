@@ -11,25 +11,24 @@ app.get('/', (req, res) => {
     res.send('olá')
 })
 
-app.post('/hook', (req, res) => {
-    let messageToSend = req.body.message;
-    const senderNumber = req.body.to;
-    console.log(messageToSend, senderNumber)
-    if (messageToSend === 'oi') {
+app.post('/hook', express.json(), (req, res) => {
+    let messageToSend = "Desculpe não conseguimos entender a sua necessidade, contate o numero: XXX";
+
+    // const senderNumber = req.body.to;
+    console.log(messageToSend, '+555192913632', req.body.Body)
+    if (req.body.Body === 'oi') {
         messageToSend = 'Olá, em que posso ajudar ?'
-    } else if (messageToSend === 'produto') {
+    } else if (req.body.Body === 'produto') {
         messageToSend = 'Olá, qual produto deseja informações ?';
-    } else if (messageToSend === 'cartão') {
+    } else if (req.body.Body === 'cartão') {
         messageToSend = 'Qual o assunto relacionado ao cartão ?';
-    } else if (messageToSend === '1 - saldo da fatura') {
+    } else if (req.body.Body === '1 - saldo da fatura') {
         messageToSend = 'O valor atual da sua fatura é: R$ 1000.00';
-    } else if (messageToSend === 'encerrar atendimento') {
+    } else if (req.body.Body === 'encerrar atendimento') {
         messageToSend = 'Obrigado por nos contatar';
-    } else {
-        messageToSend = 'Desculpe não conseguimos entender a sua necessidade, contate o numero: XXX';
     }
 
-    sendMessage(messageToSend, senderNumber);
+    sendMessage(messageToSend);
     res.send('OK');
 });
 
@@ -37,12 +36,12 @@ app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
-function sendMessage(messageToSend, to) {
+function sendMessage(messageToSend) {
     client.messages
         .create({
             body: messageToSend,
             from: `whatsapp:+14155238886`,
-            to: `whatsapp:${to}`
+            to: `whatsapp:+555192913632`
         })
         .then(message => console.log(message.sid));
 }
