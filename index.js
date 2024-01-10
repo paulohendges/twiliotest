@@ -13,35 +13,39 @@ app.get('/', (req, res) => {
 
 app.post('/hook', express.json(), (req, res) => {
     let messageToSend = "Desculpe não conseguimos entender a sua necessidade, contate o numero: XXX";
+    const body = req.body.Body.toLowerCase();
+    console.log(req.body);
+    console.log(req.headers);
 
-    // const senderNumber = req.body.to;
-    console.log(messageToSend, '+555192913632', req.body.Body)
-    if (req.body.Body === 'oi') {
-        messageToSend = 'Olá, em que posso ajudar ?'
-    } else if (req.body.Body === 'produto') {
-        messageToSend = 'Olá, qual produto deseja informações ?';
-    } else if (req.body.Body === 'cartão') {
-        messageToSend = 'Qual o assunto relacionado ao cartão ?';
-    } else if (req.body.Body === '1 - saldo da fatura') {
-        messageToSend = 'O valor atual da sua fatura é: R$ 1000.00';
-    } else if (req.body.Body === 'encerrar atendimento') {
-        messageToSend = 'Obrigado por nos contatar';
+    switch (true) {
+        case /^(oi|olá|bom dia|boa tarde|boa noite)$/.test(body):
+            messageToSend = 'Olá, em que posso ajudar ?';
+            break;
+        case /produto/.test(body):
+            messageToSend = 'Olá, qual produto deseja informações ?';
+            break;
+        case /cartão/.test(body):
+            messageToSend = 'Qual o assunto relacionado ao cartão ?';
+            break;
+        case /saldo da fatura/.test(body):
+            messageToSend = 'O valor atual da sua fatura é: R$ 1000.00';
+            break;
+        case /encerrar atendimento/.test(body):
+            messageToSend = 'Obrigado por nos contatar';
+            break;
     }
 
     sendMessage(messageToSend);
     res.send('OK');
 });
-
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
 function sendMessage(messageToSend) {
-    client.messages
-        .create({
-            body: messageToSend,
-            from: `whatsapp:+14155238886`,
-            to: `whatsapp:+555192913632`
-        })
-        .then(message => console.log(message.sid));
+    client.messages.create({
+        body: messageToSend,
+        from: `whatsapp:+14155238886`,
+        to: `whatsapp:+555192913632`
+    }).then(message => console.log(message.sid));
 }
