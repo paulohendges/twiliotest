@@ -1,6 +1,11 @@
+require('dotenv').config();
+
+const sid = process.env.WHATSAPP_SID;
+const secret = process.env.WHATSAPP_SECRET;
+
 const client = require('twilio')(
-    'ACd73bb4fef1b43626e8872a211e77d0ad',
-    'ca6573dcf09325553e7b268b2de65a51'
+    sid,
+    secret
 );
 
 const express = require('express');
