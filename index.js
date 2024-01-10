@@ -1,7 +1,8 @@
 const client = require('twilio')(
-    'ACd73bb4fef1b43626e8872a211e77d0ad',
-    'ca6573dcf09325553e7b268b2de65a51'
+    proccess.env.WHATSAPP_SID,
+    proccess.env.WHATSAPP_SECRET
 );
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
