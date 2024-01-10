@@ -26,7 +26,7 @@ app.post('/hook', express.json(), (req, res) => {
             messageToSend = 'Olá, em que posso ajudar ?';
             break;
         case /produto/.test(body):
-            messageToSend = 'Olá, qual produto deseja informações ? \n bla';
+            messageToSend = 'Olá, qual produto deseja informações ?';
             break;
         case /^(cartão de crédito|cartao de credito|cartao|cartão)$/.test(body):
             messageToSend = 'Qual o assunto relacionado ao cartão ?';
