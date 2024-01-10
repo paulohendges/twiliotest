@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
 app.post('/hook', express.json(), (req, res) => {
     let messageToSend = "Desculpe não conseguimos entender a sua necessidade, contate o numero: XXX";
     const body = req.body.Body.toLowerCase();
+
     console.log(req.body);
     console.log(req.headers);
 
@@ -22,15 +23,15 @@ app.post('/hook', express.json(), (req, res) => {
             messageToSend = 'Olá, em que posso ajudar ?';
             break;
         case /produto/.test(body):
-            messageToSend = 'Olá, qual produto deseja informações ?';
+            messageToSend = 'Olá, qual produto deseja informações ? \s\n bla';
             break;
-        case /cartão/.test(body):
+        case /^(cartão de crédito|cartao de credito|cartao|cartão)$/.test(body):
             messageToSend = 'Qual o assunto relacionado ao cartão ?';
             break;
-        case /saldo da fatura/.test(body):
+        case /^(saldo da fatura|saldo fatura|fatura)$/.test(body):
             messageToSend = 'O valor atual da sua fatura é: R$ 1000.00';
             break;
-        case /encerrar atendimento/.test(body):
+        case /^(encerrar|encerrar atendimento|tchau)$/.test(body):
             messageToSend = 'Obrigado por nos contatar';
             break;
     }
