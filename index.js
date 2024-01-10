@@ -1,4 +1,7 @@
-const client = require('twilio')('ACd73bb4fef1b43626e8872a211e77d0ad', '74ecb0d754fd13e03b2fcbffe1288021');
+const client = require('twilio')(
+    'ACd73bb4fef1b43626e8872a211e77d0ad',
+    'ca6573dcf09325553e7b268b2de65a51'
+);
 const express = require('express');
 const bodyParser = require('body-parser');
 
